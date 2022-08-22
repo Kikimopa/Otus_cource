@@ -1,8 +1,4 @@
-import time
-
-from .pages.locators import DragNDropLocators
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from locators.drag_n_drop_locators import DragNDropLocators
 from selenium.webdriver.common.action_chains import ActionChains
 
 def test_basic(browser_d_n_d):

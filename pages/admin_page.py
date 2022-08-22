@@ -1,9 +1,9 @@
-from .base_page import BasePage
-from .locators import AdminPageLocators
-from selenium.webdriver.common.action_chains import ActionChains
+from pages.base_page import BasePage
+from locators.admin_page_locators import AdminPageLocators
 
 
 class AdminPage(BasePage):
+
 
     def admin_authorization(self):
         self.browser.find_element(*AdminPageLocators.LOGIN).send_keys("admin")

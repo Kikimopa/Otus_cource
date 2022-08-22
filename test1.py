@@ -4,15 +4,16 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
-url = "http://192.168.218.128/opencart/upload/admin/"
-# url = "http://192.168.218.128/opencart/upload/"
-product_url = "http://192.168.218.128/opencart/upload/admin/index.php?route=catalog/product&user_token=SNbLHHu2JlyDgfl0Qpgb3BdoiK6cbUSV"
+url = "https://demo.opencart.com/"
 
 browser = webdriver.Chrome()
-browser.get(product_url)
+browser.get(url)
 
-browser.find_element(By.NAME, "username").send_keys("admin")
-browser.find_element(By.NAME, "password").send_keys("admin")
-browser.find_element(By.TAG_NAME, "button").click()
+location = browser.find_element(By.CLASS_NAME, "fa-caret-down").click()
+location2 = browser.find_element(By.CLASS_NAME, "dropdown-menu show")
+assert location2 , "No"
 
-browser.find_element(By.CSS_SELECTOR, "#form-product > div > table > tbody > tr:nth-child(1) > td:nth-child(1) > input[type=checkbox]").click()
+
+
+
+browser.close()
