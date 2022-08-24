@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
-class ProductCartPage(BasePage):
+class ProductPage(BasePage):
 
     def scroll_imgs(self):
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
