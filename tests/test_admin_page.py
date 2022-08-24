@@ -50,7 +50,7 @@ def test_user_can_add_new_product(browser):
     meta_tags = "Ноутбук DIGMA EVE"
     model = "15C419"
     page.user_input_new_product(name, description, meta_tags, model)
-    save_button = browser.find_element(*AdminPageLocators.SAVE_BUTTON).click()
+    page.click_to_save_button()
     page.product_is_save()
 
 
@@ -66,3 +66,12 @@ def test_user_can_delete_product(browser):
     page.go_to_products_page()
     page.admin_authorization()
     page.delete_product()
+
+def test_user_can_download_img(browser):
+    page = AdminPage(browser)
+    page.open_admin_page()
+    page.go_to_download_page()
+    page.admin_authorization()
+    page.add_new_download("selenium", "D:\otus_course\Otus_cource\data\selenium.png", "abcdefgh")
+
+

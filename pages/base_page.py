@@ -18,5 +18,5 @@ class BasePage():
             return False
 
     def open_admin_page(self):
-        self.browser.get(self.url + "admin")
+        self.browser.get("http://192.168.218.128/opencart/upload/admin/")
 

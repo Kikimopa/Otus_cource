@@ -1,3 +1,6 @@
+import time
+import os
+
 from pages.base_page import BasePage
 from locators.admin_page_locators import AdminPageLocators
 
@@ -37,10 +40,8 @@ class AdminPage(BasePage):
         success_text = self.browser.find_element(*AdminPageLocators.SUCCESS).text
         assert success_text == "Success: You have modified products!", "User don`t add new product"
 
-    def click_to_product_page(self):
-        # product_menu =
-        self.browser.find_element(*AdminPageLocators.PRODUCTS).click()
-        # product_menu[1].click()
+    def click_to_save_button(self):
+        self.browser.find_element(*AdminPageLocators.SAVE_BUTTON).click()
 
     def delete_product(self):
         self.browser.find_element(*AdminPageLocators.CHECKBOX).click()
@@ -49,4 +50,39 @@ class AdminPage(BasePage):
         alert.accept()
         success_text = self.browser.find_element(*AdminPageLocators.SUCCESS).text
         assert success_text == "Success: You have modified products!", "User don`t delete product"
+
+    def go_to_download_page(self):
+        self.browser.get("http://192.168.218.128/opencart/upload/admin/index.php?route=catalog/download&user_token=9iVLs1Z765I0QOKFupMFoz34st0m3yzw")
+
+    def add_new_download(self, name, path, mask):
+        # file_dir_name = os.path.dirname(__file__)
+        # file_name = os.path.join(file_dir_name, "selenium.png")
+        buttons = self.browser.find_elements(*AdminPageLocators.BUTTONS)[-1]
+        buttons.find_elements(*AdminPageLocators.ADD_DOWNLOAD_BUTTON)[0].click()
+        download_name = self.browser.find_element(*AdminPageLocators.DOWNLOAD_NAME)
+        download_name.send_keys(name)
+        self.browser.execute_script(
+            """var f = document.createElement("form");
+            f.id = "form-upload";
+            f.style.display = "block";
+            f.enctype = "multipart/form-data";
+            inp = document.createElement("input");
+            inp.type = "file";
+            inp.name = "file";
+            f.appendChild(inp);
+            body = document.getElementsByTagName("body")[0];
+            body.insertBefore(f, body.firstChild);
+            """)
+        download_area = self.browser.find_element(*AdminPageLocators.DOWNLOAD_AREA)
+        download_area.clear()
+        download_area.send_keys(path)
+        download_file_name = self.browser.find_element(*AdminPageLocators.DOWNLOAD_FILE_NAME)
+        download_file_name.send_keys(name)
+        downLoad_mask = self.browser.find_element(*AdminPageLocators.DOWNLOAD_MASK)
+        downLoad_mask.send_keys(mask)
+        self.browser.find_element(*AdminPageLocators.SAVE_DOWNLOAD_BUTTON).click()
+        text_danger = self.browser.find_element(*AdminPageLocators.ATTANTION)
+        assert text_danger, "User add new file"
+
+
 
