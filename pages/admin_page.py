@@ -1,5 +1,6 @@
 import time
 import os
+from selenium.webdriver.common.action_chains import ActionChains
 
 from pages.base_page import BasePage
 from locators.admin_page_locators import AdminPageLocators
@@ -9,9 +10,10 @@ class AdminPage(BasePage):
 
 
     def admin_authorization(self):
-        self.browser.find_element(*AdminPageLocators.LOGIN).send_keys("admin")
-        self.browser.find_element(*AdminPageLocators.PASSWORD).send_keys("admin")
+        self.browser.find_element(*AdminPageLocators.LOGIN).send_keys("demo")
+        self.browser.find_element(*AdminPageLocators.PASSWORD).send_keys("demo")
         self.browser.find_element(*AdminPageLocators.SUBMIT).click()
+
 
     def user_is_in_admin_page(self):
         logo = self.browser.find_element(*AdminPageLocators.LOGO)
@@ -19,7 +21,7 @@ class AdminPage(BasePage):
 
     def go_to_products_page(self):
         self.browser.get(
-            "http://192.168.218.128/opencart/upload/admin/index.php?route=catalog/product&user_token=SNbLHHu2JlyDgfl0Qpgb3BdoiK6cbUSV")
+            "https://demo.opencart.com/admin/index.php?route=catalog/product&user_token=7882991f3e8ca82d102782c78a5968b7")
 
     def click_to_add_new_product(self):
         self.browser.find_element(*AdminPageLocators.ADD_PRODUCT).click()
@@ -52,7 +54,7 @@ class AdminPage(BasePage):
         assert success_text == "Success: You have modified products!", "User don`t delete product"
 
     def go_to_download_page(self):
-        self.browser.get("http://192.168.218.128/opencart/upload/admin/index.php?route=catalog/download&user_token=9iVLs1Z765I0QOKFupMFoz34st0m3yzw")
+        self.browser.get("https://demo.opencart.com/admin/index.php?route=catalog/download&user_token=7882991f3e8ca82d102782c78a5968b7")
 
     def add_new_download(self, name, path, mask):
         # file_dir_name = os.path.dirname(__file__)
@@ -83,6 +85,11 @@ class AdminPage(BasePage):
         self.browser.find_element(*AdminPageLocators.SAVE_DOWNLOAD_BUTTON).click()
         text_danger = self.browser.find_element(*AdminPageLocators.ATTANTION)
         assert text_danger, "User add new file"
+
+    def run_by_nav_tabs(self):
+        nav_tabs = self.browser.find_elements(*AdminPageLocators.NAV_MENU)
+        for item in nav_tabs:
+            ActionChains(self.browser).move_to_element(item).pause(0.5).perform()
 
 
 

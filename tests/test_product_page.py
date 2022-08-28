@@ -1,4 +1,4 @@
-from pages.product_cart_page import ProductPage
+from pages.product_page import ProductPage
 from pages.main_page import MainPage
 
 def test_run_by_imgs(browser):
