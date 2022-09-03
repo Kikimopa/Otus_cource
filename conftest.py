@@ -1,4 +1,5 @@
 import datetime
+from datetime import date
 import time
 
 import logger
@@ -16,12 +17,12 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="function")
 def browser(request):
     browser_name = request.config.getoption("browser")
-    url = "https://demo.opencart.com/"
+    # url = "https://demo.opencart.com/"
     if browser_name == "Chrome":
         options = ChromiumOptions()
         options.add_argument("--headless")
-        browser = EventFiringWebDriver(webdriver.Chrome(options=options), MyListener())
-        browser.get(url)
+        browser = EventFiringWebDriver(webdriver.Chrome(), MyListener())
+        # browser.get(url)
         yield browser
         print("\nquit browser..")
         browser.close()
@@ -40,7 +41,7 @@ def browser(request):
 class MyListener(AbstractEventListener):
 
     def before_find(self, by, value, driver):
-        print(f"Hey Bro, I`m get ready to find element: {by}:{value}")
+        print(f"\nHey Bro, I`m get ready to find element: {by}:{value}")
 
     def after_find(self, by, value, driver):
         print(f"Bro, I`m find an element: {by}:{value}")
@@ -65,7 +66,9 @@ class MyListener(AbstractEventListener):
 
     def on_exception(self, exception, driver):
         print(f"Something happened. I`m taking screenshot")
-        driver.get_screenshot_as_file(f"screenshots/{time.time()}.png")
+        driver.get_screenshot_as_file(f"screenshots/{datetime.date.today()}.png")
+
+
 
 
 

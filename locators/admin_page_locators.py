@@ -4,7 +4,8 @@ class AdminPageLocators:
     LOGIN = (By.NAME, "username")
     PASSWORD = (By.NAME, "password")
     SUBMIT =(By.TAG_NAME, "button")
-    BUTTON_CLOSE_ALERT = (By.ID, "container")
+    BUTTON_CLOSE_ALERT = {"id" : (By.ID, "container"),
+                          "xpath" : (By.XPATH, "//button[@class='btn-close']")}
     DASHBORD = (By.TAG_NAME, "h1")
     MENU = (By.ID, "menu")
     USER_DROPDOWN = (By.CLASS_NAME, "dropdown")
@@ -13,9 +14,12 @@ class AdminPageLocators:
     WORLD_MAP_MINUS = (By.CLASS_NAME, "jqvmap-zoomout")
     LOGO = (By.ID, "header")
     COLOMN_LEFT = (By.ID, "column-left")
-    CATALOG = (By.CLASS_NAME, "parent collapsed")
-    PRODUCTS = (By.CSS_SELECTOR, "#menu ul li")
-    PRODUCT_TITLE = (By.TAG_NAME, "h1")
+    CATALOG = {"class_name" : (By.CLASS_NAME, "parent collapsed"),
+               "xpath" : (By.XPATH, "//ul[@id='menu']/li[2]")}
+    PRODUCTS = {"css" : (By.CSS_SELECTOR, "#menu ul li"),
+                "xpath" : (By.XPATH, "//ul[@id='menu']/li[2]/ul/li[2]")}
+    PRODUCT_TITLE = {"tag" : (By.TAG_NAME, "h1"),
+                     "xpath" : (By.XPATH, "//h1")}
     ADD_PRODUCT = (By.CSS_SELECTOR, "#content > div.page-header > div > div > a > i")
     ADD_PRODUCT_TITLE = (By.CLASS_NAME, "card-header")
     INPUT_PRODUCT_NAME = (By.ID, "input-name1")

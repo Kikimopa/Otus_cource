@@ -1,13 +1,12 @@
-import time
-import os
-from selenium.webdriver.common.action_chains import ActionChains
-
 from pages.base_page import BasePage
 from locators.admin_page_locators import AdminPageLocators
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class AdminPage(BasePage):
 
+    def open_admin_page(self):
+        self.browser.get("https://demo.opencart.com/admin/")
 
     def admin_authorization(self):
         self.browser.find_element(*AdminPageLocators.LOGIN).send_keys("demo")
@@ -20,8 +19,15 @@ class AdminPage(BasePage):
         assert logo, "User is not connected to admin page"
 
     def go_to_products_page(self):
-        self.browser.get(
-            "https://demo.opencart.com/admin/index.php?route=catalog/product&user_token=7882991f3e8ca82d102782c78a5968b7")
+        # self.browser.get(
+        #     "https://demo.opencart.com/admin/index.php?route=catalog/product&user_token=7882991f3e8ca82d102782c78a5968b7")
+        # self.browser.find_element(*AdminPageLocators.BUTTON_CLOSE_ALERT["xpath"]).click()
+        self.browser.find_element(*AdminPageLocators.CATALOG["xpath"]).click()
+        self.browser.find_element(*AdminPageLocators.PRODUCTS["xpath"]).click()
+        title = self.browser.find_element(*AdminPageLocators.PRODUCT_TITLE["xpath"]).text
+        assert title == "Products", "User doesn`t in product catalog"
+
+
 
     def click_to_add_new_product(self):
         self.browser.find_element(*AdminPageLocators.ADD_PRODUCT).click()

@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from pages.main_page import MainPage
 from selenium.webdriver.common.action_chains import ActionChains
@@ -35,7 +37,7 @@ def test_click_to_cart(browser):
 
 def test_click_to_product(browser):
     main_page = MainPage(browser)
-    main_page.click_to_product(3)
+    main_page.click_to_product(1)
 
 
 def test_add_product_to_cart(browser):

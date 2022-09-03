@@ -17,6 +17,5 @@ class BasePage():
         except NoSuchElementException:
             return False
 
-    def open_admin_page(self):
-        self.browser.get("https://demo.opencart.com/admin/")
+
 

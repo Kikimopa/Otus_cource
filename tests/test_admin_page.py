@@ -11,12 +11,12 @@ def test_user_can_login(browser):
 
 
 
-# def test_user_can_go_to_product_page(browser):
-#     page = AdminPage(browser)
-#     page.go_to_admin_page()
-#     page.admin_authorization()
-#     page.click_to_product_page()
-#     time.sleep(5)
+def test_user_can_go_to_product_page(browser):
+    page = AdminPage(browser)
+    page.open_admin_page()
+    page.admin_authorization()
+    page.go_to_products_page()
+
 
 
 def test_user_can_go_to_add_new_product_page(browser):
