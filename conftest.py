@@ -66,7 +66,7 @@ class MyListener(AbstractEventListener):
 
     def on_exception(self, exception, driver):
         print(f"Something happened. I`m taking screenshot")
-        driver.get_screenshot_as_file(f"screenshots/{datetime.date.today()}.png")
+        driver.get_screenshot_as_file(rf"screenshots\{datetime.datetime.now()}.png")
 
 
 

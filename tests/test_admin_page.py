@@ -22,9 +22,8 @@ def test_user_can_go_to_product_page(browser):
 def test_user_can_go_to_add_new_product_page(browser):
     page = AdminPage(browser)
     page.open_admin_page()
-    page.go_to_products_page()
     page.admin_authorization()
-    time.sleep(0.5)
+    page.go_to_products_page()
     page.click_to_add_new_product()
     page.check_product_page()
 
@@ -32,9 +31,9 @@ def test_user_can_go_to_add_new_product_page(browser):
 def test_user_can_run_by_nav_tabs(browser):
     page = AdminPage(browser)
     page.open_admin_page()
-    page.go_to_products_page()
     page.admin_authorization()
-    time.sleep(0.5)
+    page.go_to_products_page()
+    time.sleep(0.1)
     page.click_to_add_new_product()
     page.run_by_nav_tabs()
 
@@ -43,9 +42,9 @@ def test_user_can_run_by_nav_tabs(browser):
 def test_user_can_add_new_product(browser):
     page = AdminPage(browser)
     page.open_admin_page()
-    page.go_to_products_page()
     page.admin_authorization()
-    time.sleep(0.5)
+    page.go_to_products_page()
+    time.sleep(0.1)
     page.click_to_add_new_product()
     name = "Ноутбук DIGMA EVE 15C419"
     description = "Ноутбук DIGMA EVE 15C419 1920x1080, Intel Celeron N4020 1.1 ГГц, SSD 128 ГБ, Intel UHD Graphics 600, Windows 10 Home, ES5065EW, темно-серый"
@@ -65,9 +64,9 @@ def test_user_can_copy_product(browser):
 def test_user_can_delete_product(browser):
     page = AdminPage(browser)
     page.open_admin_page()
-    page.go_to_products_page()
     page.admin_authorization()
-    page.delete_product()
+    page.go_to_products_page()
+    page.delete_product(3)
 
 def test_user_can_download_img(browser):
     page = AdminPage(browser)
