@@ -1,7 +1,4 @@
 import datetime
-from datetime import date
-import time
-
 import logger
 import pytest
 from selenium import webdriver
@@ -11,8 +8,7 @@ from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
 
 def pytest_addoption(parser):
-    parser.addoption('--browser', action='store', default="Chrome", help='Choose browser: Chrome, Firefox, Edge')
-
+    parser.addoption('--browser', "-B", action='store', default="Chrome", help='Choose browser: Chrome, Firefox, Edge')
 
 @pytest.fixture(scope="function")
 def browser(request):
@@ -21,8 +17,7 @@ def browser(request):
     if browser_name == "Chrome":
         options = ChromiumOptions()
         options.add_argument("--headless")
-        browser = EventFiringWebDriver(webdriver.Chrome(), MyListener())
-        # browser.get(url)
+        browser = EventFiringWebDriver(webdriver.Chrome(options=options), MyListener())
         yield browser
         print("\nquit browser..")
         browser.close()
@@ -36,6 +31,9 @@ def browser(request):
         yield browser
         print("\nquit browser..")
         browser.close()
+    else:
+        raise Exception(f"{request.param} is not supported!")
+
 
 
 class MyListener(AbstractEventListener):
@@ -66,14 +64,14 @@ class MyListener(AbstractEventListener):
 
     def on_exception(self, exception, driver):
         print(f"Something happened. I`m taking screenshot")
-        driver.get_screenshot_as_file(rf"screenshots\{datetime.datetime.now()}.png")
+        driver.get_screenshot_as_file(f"screenshots\\{datetime.datetime.now()}.png")
 
 
 
 
 
 @pytest.fixture(scope="function")
-def browser_d_n_d(request):
+def browser_d_n_d():
     browser = webdriver.Chrome()
     yield browser
     browser.close()

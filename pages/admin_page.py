@@ -18,7 +18,7 @@ class AdminPage(BasePage):
         self.browser.find_element(*AdminPageLocators.SUBMIT["tag"]).click()
 
 
-    def user_is_in_admin_page(self):
+    def is_in_admin_page(self):
         logo = self.browser.find_element(*AdminPageLocators.LOGO)
         assert logo, "User is not connected to admin page"
 
@@ -37,9 +37,9 @@ class AdminPage(BasePage):
         add_product_title = self.browser.find_element(*AdminPageLocators.ADD_PRODUCT_TITLE["xpath_my"]).text
         assert add_product_title == "Add Product", "User can not add new product"
 
-    def user_input_new_product(self, name, description, meta_tags, model):
+    def input_new_product(self, name, description, meta_tags, model):
         self.browser.find_element(*AdminPageLocators.INPUT_PRODUCT_NAME["xpath"]).send_keys(name)
-        self.browser.find_element(*AdminPageLocators.PRODUCT_DESCRIPTION["xpath"]).send_keys(description)
+        self.browser.find_element(*AdminPageLocators.PRODUCT_DESCRIPTION["xpath_my"]).send_keys(description)
         self.browser.find_element(*AdminPageLocators.META_TAG_TITLE["xpath"]).send_keys(meta_tags)
         self.browser.find_element(*AdminPageLocators.DATA["xpath"]).click()
         self.browser.find_element(*AdminPageLocators.MODEL["xpath"]).send_keys(model)
@@ -60,8 +60,8 @@ class AdminPage(BasePage):
             self.browser.find_element(*AdminPageLocators.DELETE_BUTTON["xpath"]).click()
             alert = self.browser.switch_to.alert
             alert.accept()
-            success_text = self.browser.find_element(*AdminPageLocators.SUCCESS["class_name"]).text
-            assert success_text == "Success: You have modified products!", "User don`t delete product"
+            success_text = self.browser.find_element(*AdminPageLocators.SUCCESS["xpath"]).text
+            assert success_text == "Success: You have modified products!", "User doesn`t delete product"
         else:
             print("Don`t do it!!!")
 
@@ -102,6 +102,17 @@ class AdminPage(BasePage):
         nav_tabs = self.browser.find_elements(*AdminPageLocators.NAV_MENU["xpath"])
         for item in nav_tabs:
             ActionChains(self.browser).move_to_element(item).pause(0.5).perform()
+
+    def copy_product(self, number):
+        index = number - 1
+        if index > 0:
+            check_box = self.browser.find_elements(*AdminPageLocators.CHECKBOX["xpath"])
+            check_box[index].click()
+            self.browser.find_element(*AdminPageLocators.COPY_BUTTON["xpath"]).click()
+            success_text = self.browser.find_element(*AdminPageLocators.SUCCESS["xpath"]).text
+            assert success_text == "Success: You have modified products!", "User doesn`t copy product"
+        else:
+            print("Don`t do it!!! Out of range")
 
 
 

@@ -9,9 +9,12 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class MainPage(BasePage):
 
+    def open_main_page(self):
+        self.browser.get("https://demo.opencart.com/")
+
     def check_main_page(self):
-        logo = self.browser.find_element(*MainPageLocators.LOGO["xpath"])
-        assert logo.getattribut("title") == "Your Store", 'It is not opencart homepage'
+        logo = self.browser.find_element(*MainPageLocators.LOGO["xpath"]).get_attribute("title")
+        assert logo == "Your Store", 'It is not opencart homepage'
 
     def check_currency(self):
         self.browser.find_element(*MainPageLocators.CURRENCY["xpath"]).click()

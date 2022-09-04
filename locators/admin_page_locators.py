@@ -28,11 +28,12 @@ class AdminPageLocators:
                          "xpath_demo" : (By.XPATH, "//div[@class='card-header']"),
                          "xpath_my" : (By.XPATH, "//h3[@class='panel-title']")}
     INPUT_PRODUCT_NAME = {"id" : (By.ID, "input-name1"),
-                          "xpath" : (By.XPATH, "//input[@id='input-name-1']")}
+                          "xpath" : (By.XPATH, "//input[@id='input-name1']")}
     PRODUCT_DESCRIPTION = {"class_name" : (By.CLASS_NAME, "panel-body"),
-                           "xpath": (By.XPATH, "//iframe")}
+                           "xpath_demo": (By.XPATH, "//iframe"),
+                           "xpath_my" : (By.XPATH, "//div[@class='note-editable panel-body']/p")}
     META_TAG_TITLE = {"id" : (By.ID, "input-meta-title1"),
-                      "xpath": (By.XPATH, "//input[@id='input-meta-title-1']")}
+                      "xpath": (By.XPATH, "//input[@id='input-meta-title1']")}
     NAV_MENU = {"css" : (By.CSS_SELECTOR, "ul.nav > li"),
                 "xpath": (By.XPATH, "//ul[@class='nav nav-tabs']")}
     MODEL = {"name" : (By.NAME, "model"),
@@ -41,7 +42,7 @@ class AdminPageLocators:
     SAVE_BUTTON = {"class_name" : (By.CLASS_NAME, "fa fa-save"),
                    "xpath": (By.XPATH, "//button[@aria-label='Save']")}
     SUCCESS = {"class_name" : (By.CLASS_NAME, "alert alert-success alert-dismissible"),
-               "xpath": (By.XPATH, "")}
+               "xpath": (By.XPATH, "//i[@class='fa fa-check-circle']")}
     CHECKBOX = {"css" : (By.CSS_SELECTOR, "#form-product > div > table > tbody > tr:nth-child(1) > td:nth-child(1) > input[type=checkbox]"),
                 "xpath": (By.XPATH, "//tbody/tr/td/input")}
     DELETE_BUTTON = {"class_name" : (By.CLASS_NAME, "fa-trash-o"),
@@ -61,3 +62,4 @@ class AdminPageLocators:
                            "xpath" : (By.XPATH, "")}
     ATTANTION = {"class_name" : (By.CLASS_NAME, "text-danger"),
                  "xpath" : (By.XPATH, "")}
+    COPY_BUTTON = {"xpath" : (By.XPATH, "//i[@class='fa fa-copy']")}
