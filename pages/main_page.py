@@ -49,9 +49,9 @@ class MainPage(BasePage):
         cart = self.browser.find_element(*MainPageLocators.CART["xpath"])
         cart.click()
 
-    def click_to_product(self, number):
-        index = number - 1
+    def click_to_product(self, index):
         product_name = self.browser.find_elements(*MainPageLocators.PRODUCT_NAME["xpath"])[index].text
+        print(product_name)
         product = self.browser.find_elements(*MainPageLocators.PRODUCT["xpath"])[index]
         product.click()
         name_after_click = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME["xpath"]).text

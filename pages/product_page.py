@@ -11,15 +11,11 @@ class ProductPage(BasePage):
 
     def scroll_imgs(self):
         count_imgs = self.browser.find_elements(*ProductPageLocators.COUNT_IMGS["xpath"])
-        #print(f"len count_imgs: {len(count_imgs) + 1}")
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME["xpath"]).text
-        #print(f"product_name: {product_name}")
         main_img = self.browser.find_element(*ProductPageLocators.ITEM_IMGS["xpath"]).click()
-        time.sleep(0.5)
+        time.sleep(0.2)
         count_imgs_in_holder = self.browser.find_element(*ProductPageLocators.COUNT_IMGS_IN_HOLDER["xpath"]).text
-        #print(f"count_imgs_in_holder: {count_imgs_in_holder[5:]}")
         product_name_in_holder = self.browser.find_element(*ProductPageLocators.IMG_NAME["xpath"]).text
-        #print(f"product_name_in_holder: {product_name_in_holder}")
         scroll_next = self.browser.find_element(*ProductPageLocators.SCROLL_IMG_NEXT["xpath"])
         count = 0
         for i in range(len(count_imgs) + 1):
@@ -27,7 +23,7 @@ class ProductPage(BasePage):
             count += 1
 
         assert count == len(count_imgs) + 1, f"{count} != {len(count_imgs)} User doesn`t see all images"
-        assert len(count_imgs) + 1 == int(count_imgs_in_holder[5:]), f"{len(count_imgs)} != {int(count_imgs_in_holder[5:])} Any pictures are lost"
+        assert len(count_imgs) + 1 == int(count_imgs_in_holder[5:]), f"{len(count_imgs)} != {count_imgs_in_holder[5:]} Any pictures are lost"
         assert product_name == product_name_in_holder, "The names are different"
 
     def check_product_name(self):
@@ -60,6 +56,7 @@ class ProductPage(BasePage):
         WebDriverWait(self.browser, 2).until(EC.presence_of_element_located((By.CLASS_NAME, "fa-check-circle")))
 
     def run_by_product_tabs(self):
-        nav_tabs = self.browser.find_elements(*ProductPageLocators.ITEM_NAV["xpath"])
-        for item in nav_tabs:
-            ActionChains(self.browser).move_to_element(item).pause(1).perform()
+        self.browser.execute_script("window.scrollBy(0, 2500)")
+        nav_tabs_items = self.browser.find_elements(*ProductPageLocators.NAV_TAB_ITEMS["xpath"])
+        for item in nav_tabs_items:
+            ActionChains(self.browser).move_to_element(item).pause(0.5).perform()

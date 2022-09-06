@@ -42,7 +42,7 @@ def test_click_to_cart(browser):
     main_page.click_to_cart()
 
 @allure.severity(allure.severity_level.CRITICAL)
-@pytest.mark.parametrize('num_product', [random.randint(1, 4)])
+@pytest.mark.parametrize('num_product', [random.randint(0, 3)])
 def test_click_to_product(browser, num_product):
     main_page = MainPage(browser)
     main_page.open_main_page()

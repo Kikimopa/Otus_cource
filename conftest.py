@@ -17,7 +17,8 @@ def browser(request):
     if browser_name == "Chrome":
         options = ChromiumOptions()
         options.add_argument("--headless")
-        browser = EventFiringWebDriver(webdriver.Chrome(options=options), MyListener())
+        #browser = EventFiringWebDriver(webdriver.Chrome(options=options), MyListener())
+        browser = EventFiringWebDriver(webdriver.Chrome(), MyListener())
         yield browser
         print("\nquit browser..")
         browser.close()
@@ -64,7 +65,7 @@ class MyListener(AbstractEventListener):
 
     def on_exception(self, exception, driver):
         print(f"Something happened. I`m taking screenshot")
-        driver.get_screenshot_as_file(f"screenshots\\{datetime.datetime.now()}.png")
+        driver.get_screenshot_as_file(rf"screenshots\{datetime.datetime.now()}.png")
 
 
 
